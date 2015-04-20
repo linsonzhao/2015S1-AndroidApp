@@ -25,8 +25,7 @@ public class AboutFragment extends SherlockFragment implements OnClickListener {
 	private LinearLayout about, authors;
 	
 	//List of authors
-	private final String[] autores = {"Dr. Changseok Bae", "Dr. Vera Chung", "Zhenghao Chen", "Chongli Zhao", 
-			"Ximeng Zhao", "Jun Shou", "Feng Sha", "Guang Liu", "Victor Santiago"};
+	private final String[] autores = { "Chongli Zhao", "Victor Santiago"};
 	
 	//About text
 	private final String sobre = "The aim of this project is to enhance the visiting experience of visitors " +
