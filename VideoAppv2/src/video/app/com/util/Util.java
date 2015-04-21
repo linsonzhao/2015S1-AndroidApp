@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
  * Collection of useful methods to access and retrieve information stored on the
  * SharedPreferences, such as the custom server's IP.
  * 
- * @author victor
  *
  */
 public class Util {

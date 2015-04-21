@@ -40,7 +40,6 @@ import com.exemplo.videoapp.R;
  * to the user, and when the user touches the image, a red square appears,
  * and a track button sends this coordinates to a server.
  * 
- * @author victor
  *
  */
 public class TrackingSelection extends SherlockActivity implements OnMenuItemClickListener {

@@ -10,7 +10,6 @@ import android.widget.ImageView;
  * Custom ImageView. The only thing it does is to adjust the view size when 
  * stretching the image on the TrackingSelection activity.
  * 
- * @author victor
  *
  */
 public class ScallingImageView extends ImageView {

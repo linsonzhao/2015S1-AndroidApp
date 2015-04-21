@@ -32,7 +32,6 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
  * Custom video capture class to be used on the future, if decide to capture
  * videos from the users device and upload to the server with custom and pre-determined
  * quality, format and length.
- * @author victor
  *
  */
 public class VideoCapture extends SherlockActivity implements OnMenuItemClickListener {

@@ -12,7 +12,6 @@ import com.exemplo.videoapp.R;
  * The first page the user will see, for about 2 seconds, and then
  * will be redirected to the MainMenu activity.
  * 
- * @author victor
  *
  */
 public class Introduction extends SherlockActivity {

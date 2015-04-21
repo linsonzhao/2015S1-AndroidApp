@@ -12,7 +12,6 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 /**
  * Adapter used to handle the tabs from the MainMenu
- * @author victor
  *
  */
 public class TabsAdapter extends FragmentPagerAdapter implements

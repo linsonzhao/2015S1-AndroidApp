@@ -15,7 +15,6 @@ import android.provider.MediaStore;
  * Collection of useful methods to get the real path from a file through the Uri,
  * separated by API levels.
  * 
- * @author victor
  *
  */
 public class RealPathUtil {

@@ -13,7 +13,6 @@ import video.app.com.objects.Video;
 
 /**
  * Collection of methods dedicated to parse the XML response from the server.
- * @author victor
  *
  */
 public class XMLParser {

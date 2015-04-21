@@ -18,7 +18,6 @@ import android.widget.ImageView;
  * the top left corner of the square, and square size, needed to 
  * send the server to track the object.
  * 
- * @author victor
  *
  */
 public class SelectorView extends ImageView {

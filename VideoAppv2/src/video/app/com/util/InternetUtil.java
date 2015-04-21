@@ -16,7 +16,6 @@ import android.util.Log;
 
 /**
  * Useful methods to connect to facilitate the connection to the server.
- * @author victor
  *
  */
 public class InternetUtil {

@@ -15,7 +15,6 @@ import com.exemplo.videoapp.R;
 
 /**
  * Class with all the information related to the about fragment
- * @author victor
  *
  */
 public class AboutFragment extends SherlockFragment implements OnClickListener {

@@ -14,7 +14,6 @@ import android.view.SurfaceView;
  * class will be useful because we will need a custom camera application to 
  * record videos with pre-determined quality, format and duration.
  * 
- * @author victor
  *
  */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {

@@ -12,7 +12,6 @@ import android.widget.TextView;
 /**
  * Simple adapter that receives a String[] and shows a list.
  * It's used on ActionsList activity to display the options.
- * @author victor
  *
  */
 public class SimpleListAdapter extends BaseAdapter {

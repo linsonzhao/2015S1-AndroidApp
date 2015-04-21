@@ -9,7 +9,6 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 /**
  * Receiver for the Google Cloud Message
  * 
- * @author victor
  *
  */
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {

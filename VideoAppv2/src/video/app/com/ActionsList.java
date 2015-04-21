@@ -29,7 +29,6 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
  * This class handles the creation of the list the user sees when he selects an
  * animal cloud. This class handles the subscriptions as well.
  * 
- * @author victor
  *
  */
 public class ActionsList extends SherlockActivity implements

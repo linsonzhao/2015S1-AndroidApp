@@ -34,7 +34,6 @@ import com.exemplo.videoapp.R;
 
 /**
  * This class creates and show a GridView in a cloud format of all the videos.
- * @author victor
  *
  */
 public class AllVideosFragment extends SherlockFragment implements OnItemClickListener, OnMenuItemClickListener{

@@ -19,7 +19,6 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
  * This class handles what to do with the data received. In this case, we launch
  * a notification. See method sendNotification()
  * 
- * @author victor
  *
  */
 public class GcmIntentService extends IntentService {

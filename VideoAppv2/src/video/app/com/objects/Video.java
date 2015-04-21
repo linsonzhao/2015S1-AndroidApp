@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 /**
  * Video Object that carries all the needed information through the Activities.
- * @author victor
  *
  */
 public class Video implements Parcelable {

@@ -14,7 +14,6 @@ import com.exemplo.videoapp.R;
 
 /**
  * This adapter handles the creation of the grid clouds on the MainMenu
- * @author victor
  *
  */
 public class GridAdapter extends BaseAdapter {

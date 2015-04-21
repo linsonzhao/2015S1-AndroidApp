@@ -24,7 +24,6 @@ import com.exemplo.videoapp.R;
 
 /**
  * Handles the upload from the user's device to the server
- * @author victor
  *
  */
 public class Upload extends SherlockActivity {

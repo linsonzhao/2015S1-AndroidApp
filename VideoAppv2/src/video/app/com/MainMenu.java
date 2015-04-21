@@ -37,7 +37,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
  * This class only handles the tabs. To see and edit the content of each tab,
  * go to the Tabs package.
  * 
- * @author victor
  * @see AboutFragment, AllVideosFragment
  */
 public class MainMenu extends SherlockFragmentActivity implements OnMenuItemClickListener {
