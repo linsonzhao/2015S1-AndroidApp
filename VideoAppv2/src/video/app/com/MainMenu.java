@@ -1,12 +1,15 @@
 package video.app.com;
 
+import video.app.autobahn.WebSocket;
 import video.app.com.adapter.TabsAdapter;
 import video.app.com.tabs.AboutFragment;
 import video.app.com.tabs.AllVideosFragment;
 import video.app.com.tabs.DetectFragment;
+import video.app.com.tabs.LiveVideoFragment;
 import video.app.com.tabs.TrackedFragment;
 import video.app.com.util.RealPathUtil;
 import video.app.com.util.Util;
+import video.app.com.websocket.WebSocketMain;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -73,8 +76,9 @@ public class MainMenu extends SherlockFragmentActivity implements OnMenuItemClic
 		Tab detect = bar.newTab();
 		detect.setText("detect");
 		
-		Tab about = bar.newTab();
-		about.setText("About");
+		
+		Tab liveVideo = bar.newTab();
+		liveVideo.setText("LiveVideo");
 		
 		mTabsAdapter.addTab(
 				animalsList,
@@ -89,8 +93,8 @@ public class MainMenu extends SherlockFragmentActivity implements OnMenuItemClic
 				DetectFragment.class, null);
 		
 		mTabsAdapter.addTab(
-				about,
-				AboutFragment.class, null);
+				liveVideo,
+				LiveVideoFragment.class, null);
 	}
 	
 	@Override
