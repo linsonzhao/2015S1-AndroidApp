@@ -29,7 +29,7 @@ public class LiveVideoFragment extends SherlockFragment implements OnClickListen
 
 	private View v;
 	private WebSocket mConnection = WebSocketMain.getInstance().getWSConnection();
-	static final String TAG = "video.app.com.tabs.DetectFragment";
+	static final String TAG = "video.app.com.tabs.LiveVideoFragment";
 	private Util util;
 	private ToggleButton tbtn1;
 	private ToggleButton tbtn2;

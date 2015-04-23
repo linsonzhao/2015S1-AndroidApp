@@ -39,7 +39,8 @@ import com.exemplo.videoapp.R;
 public class AllVideosFragment extends SherlockFragment implements OnItemClickListener, OnMenuItemClickListener{
 	
 	private final String VIDEOS_ENDPOINT = "videos?apikey=9061";
-	//private final String VIDEOS_ENDPOINT = "videoslist.xml?apikey=9061";
+	private final String RAWVIDEOS_ENDPOINT = "rawvideos?apikey=9061";
+	private final String TRACKEDVIDEOS_ENDPOINT = "trackedvideos?apikey=9061";
 	
 	private InternetUtil iUtil;
 	
