@@ -1,99 +1,183 @@
 package video.app.com.tabs;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.exemplo.videoapp.R;
 
+import video.app.autobahn.WebSocketConnection;
+import video.app.autobahn.WebSocketConnectionHandler;
+import video.app.autobahn.WebSocketException;
+import video.app.autobahn.WebSocket;
+import video.app.com.util.Util;
+import video.app.com.websocket.WebSocketMain;
+
 /**
- * Class with all the information related to the about fragment
  *
  */
 public class LiveVideoFragment extends SherlockFragment implements OnClickListener {
 
 	private View v;
-	
-	private LinearLayout camera1, camera2;
-	
-	//List of authors
-	private final String[] autores = { "Chongli Zhao", "Victor Santiago"};
-	
-	//About text
-	private final String sobre = "The aim of this project is to enhance the visiting experience of visitors " +
-						"by utilizing established sensor networks and visitors' mobile devices, and " +
-						"to provide attractive services to on-site visitors and online visitors.\n\n" +
-						"To demonstrate the concept, in this project we are going to build a " +
-						"\"digital zoo\" which will bring on-site visitors novel and unique experience " +
-						"based on AR  technology, meanwhile provide attractive remote visiting " +
-						"services to online visitors.";
-	
+	private WebSocket mConnection = WebSocketMain.getInstance().getWSConnection();
+	static final String TAG = "video.app.com.tabs.DetectFragment";
+	private Util util;
+	private ToggleButton tbtn1;
+	private ToggleButton tbtn2;
+	private ImageView imgViewer1;
+	private String wsuri;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		v = inflater.inflate(R.layout.tab_livevideo, container, false);
-		
+
+		v = inflater.inflate(R.layout.tab_livevideo_web, container, false);
+        
+		util = new Util(this.getActivity());
 		init();
 		
 		return v;
 	}
 	
 	private void init() {
-		camera1 = (LinearLayout) v.findViewById(R.id.llCamera1);
-		camera1.setOnClickListener(this);
 		
-		camera2 = (LinearLayout) v.findViewById(R.id.llCamera2);
-		camera2.setOnClickListener(this);
+		tbtn1 = (ToggleButton)v.findViewById(R.id.tbtnCamera1);
+		tbtn1.setOnClickListener(this);
+		
+		tbtn2 = (ToggleButton)v.findViewById(R.id.tbtnCamera2);
+		tbtn2.setOnClickListener(this);
 	}
 	
-	private void popDialog(String title, String message, boolean cancelable, 
-			DialogInterface.OnClickListener okButton, ArrayAdapter<String> adapter) {
-		AlertDialog.Builder adBuilder = new AlertDialog.Builder(getSherlockActivity());
-		if(adapter == null)
-			adBuilder.setMessage(message);
-		else
-			adBuilder.setAdapter(adapter, null);
-		adBuilder.setTitle(title);
-		adBuilder.setCancelable(cancelable);
-		adBuilder.setPositiveButton(android.R.string.ok, okButton);
-		AlertDialog adFinal = adBuilder.create();
-		adFinal.show();
-	}
+	private void start() {
 
+      try {
+
+         mConnection.connect(wsuri, new WebSocketConnectionHandler() {
+        	 
+            @Override
+            public void onOpen() {
+            	mConnection.sendTextMessage("Android app ws established.");
+            }
+
+            @Override
+            public void onTextMessage(String payload) {
+            	Log.i(TAG, "from websocket server: " + payload);
+            }
+            
+            @Override
+            public void onBinaryMessage(byte[] payload){
+            	try{
+            		imgViewer1 = (ImageView) getActivity().findViewById(R.id.imageView1);
+            		DisplayMetrics dm = new DisplayMetrics();
+                    Bitmap bm = BitmapFactory.decodeByteArray(payload, 0, payload.length);
+                    getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+                    imgViewer1.setMinimumHeight(dm.heightPixels);
+                    imgViewer1.setMinimumWidth(dm.widthPixels);
+                    imgViewer1.setImageBitmap(bm);
+            	}
+            	catch(Exception e){
+            		Log.e(TAG, e.getMessage());
+            	}
+            }
+
+            @Override
+            public void onClose(int code, String reason) {
+
+            }
+         });
+         
+      } catch (WebSocketException e) {
+         Log.d(TAG, e.toString());
+      }
+      
+   }
+	
+	
 	@Override
 	public void onClick(View arg0) {
 		switch(arg0.getId()) {
-			case R.id.llCamera1:
-				popDialog("About", sobre, true, 
-						new DialogInterface.OnClickListener() {
+			case R.id.tbtnCamera1:
+				if(tbtn1.isChecked()){
+					tbtn2.setEnabled(false);
 					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.cancel();
+					Log.d(TAG, "toggle button1 is on");
+					wsuri = "ws://" + util.getIP() + "/videotracking/camera1";
+					start();
+					//////////////////////////////////////
+					//need time to establish websocket connection.
+					//need to put a few waiting time, otherwise will have error.
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
-				}, null);
+					///////////////////////////////////////
+					Thread thread = new Thread(){
+						public void run(){
+							while(tbtn1.isChecked()){
+								try {
+									mConnection.sendTextMessage("Android app waiting for image.");
+									Thread.sleep(100);
+								} catch (Exception e) {
+									Log.e(TAG, e.getMessage());
+								}
+							}
+						}
+					};
+					thread.start();
+				}
+				else{
+					Log.d(TAG, "toggle button1 is off");
+					mConnection.disconnect();
+					tbtn2.setEnabled(true);
+				}
 				break;
-				
-			case R.id.llCamera2:
-				popDialog("Authors", null, true, 
-						new DialogInterface.OnClickListener() {
+			case R.id.tbtnCamera2:
+				if(tbtn2.isChecked()){
+					tbtn1.setEnabled(false);
 					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.cancel();
+					Log.d(TAG, "toggle button2 is on");
+					wsuri = "ws://" + util.getIP() + "/videotracking/camera2";
+					start();
+					//////////////////////////////////////
+					//need time to establish websocket connection.
+					//need to put a few waiting time, otherwise will have error.
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
-				}, new ArrayAdapter<String>(getSherlockActivity(), 
-						android.R.layout.select_dialog_item, autores));
+					///////////////////////////////////////
+					Thread thread = new Thread(){
+						public void run(){
+							while(tbtn2.isChecked()){
+								try {
+									mConnection.sendTextMessage("Android app waiting for image.");
+									Thread.sleep(100);
+								} catch (Exception e) {
+									Log.e(TAG, e.getMessage());
+								}
+							}
+						}
+					};
+					thread.start();
+				}
+				else{
+					Log.d(TAG, "toggle button is off");
+					mConnection.disconnect();
+					tbtn1.setEnabled(true);
+				}
 				break;
 		}
 	}
-
 }

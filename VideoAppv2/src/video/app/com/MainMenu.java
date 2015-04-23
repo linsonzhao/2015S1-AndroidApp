@@ -4,8 +4,8 @@ import video.app.autobahn.WebSocket;
 import video.app.com.adapter.TabsAdapter;
 import video.app.com.tabs.AboutFragment;
 import video.app.com.tabs.AllVideosFragment;
-import video.app.com.tabs.DetectFragment;
 import video.app.com.tabs.LiveVideoFragment;
+import video.app.com.tabs.CamFragment;
 import video.app.com.tabs.TrackedFragment;
 import video.app.com.util.RealPathUtil;
 import video.app.com.util.Util;
@@ -73,12 +73,12 @@ public class MainMenu extends SherlockFragmentActivity implements OnMenuItemClic
 		Tab tracked = bar.newTab();
 		tracked.setText("tracked");
 		
-		Tab detect = bar.newTab();
-		detect.setText("detect");
-		
-		
 		Tab liveVideo = bar.newTab();
-		liveVideo.setText("LiveVideo");
+		liveVideo.setText("livevideo");
+		
+		
+		Tab about = bar.newTab();
+		about.setText("About");
 		
 		mTabsAdapter.addTab(
 				animalsList,
@@ -89,12 +89,12 @@ public class MainMenu extends SherlockFragmentActivity implements OnMenuItemClic
 				TrackedFragment.class, null);
 		
 		mTabsAdapter.addTab(
-				detect,
-				DetectFragment.class, null);
-		
-		mTabsAdapter.addTab(
 				liveVideo,
 				LiveVideoFragment.class, null);
+		
+		mTabsAdapter.addTab(
+				about,
+				AboutFragment.class, null);
 	}
 	
 	@Override
