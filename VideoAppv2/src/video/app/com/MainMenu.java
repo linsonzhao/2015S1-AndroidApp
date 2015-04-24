@@ -1,16 +1,13 @@
 package video.app.com;
 
-import video.app.autobahn.WebSocket;
 import video.app.com.adapter.TabsAdapter;
-import video.app.com.tabs.AboutFragment;
-import video.app.com.tabs.AllVideosFragment;
 import video.app.com.tabs.DetectFragment;
 import video.app.com.tabs.LiveVideoFragment;
-import video.app.com.tabs.CamFragment;
-import video.app.com.tabs.TrackedFragment;
+import video.app.com.tabs.MapFragment;
+import video.app.com.tabs.RawVideosFragment;
+import video.app.com.tabs.TrackedVideosFragment;
 import video.app.com.util.RealPathUtil;
 import video.app.com.util.Util;
-import video.app.com.websocket.WebSocketMain;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -22,7 +19,6 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -71,30 +67,40 @@ public class MainMenu extends SherlockFragmentActivity implements OnMenuItemClic
 		Tab liveVideo = bar.newTab();
 		liveVideo.setText("livevideo");
 		
+		Tab detect = bar.newTab();
+		detect.setText("Detect");
+		
 		Tab animalsList = bar.newTab();
 		animalsList.setText("Animals");
 		
 		Tab tracked = bar.newTab();
 		tracked.setText("tracked");		
 		
-		Tab detect = bar.newTab();
-		detect.setText("Detect");
+		Tab map = bar.newTab();
+		map.setText("map");		
 		
 		mTabsAdapter.addTab(
 				liveVideo,
 				LiveVideoFragment.class, null);
 		
 		mTabsAdapter.addTab(
+				detect,
+				DetectFragment.class, null);
+		
+//		mTabsAdapter.addTab(
+//				animalsList,
+//				AllVideosFragment.class, null);
+		mTabsAdapter.addTab(
 				animalsList,
-				AllVideosFragment.class, null);
+				RawVideosFragment.class, null);
 		
 		mTabsAdapter.addTab(
 				tracked,
-				TrackedFragment.class, null);
+				TrackedVideosFragment.class, null);
 		
 		mTabsAdapter.addTab(
-				detect,
-				DetectFragment.class, null);
+				map,
+				MapFragment.class, null);
 	}
 	
 	@Override

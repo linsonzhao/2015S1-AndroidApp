@@ -54,7 +54,8 @@ public class GridAdapter extends BaseAdapter {
 		}
 		
 		final TextView target = (TextView) v.findViewById(R.id.tvVideoTarget);
-		target.setText(videos.get(arg0).getName());
+		//video name + video id as the cloud name
+		target.setText(videos.get(arg0).getName()+videos.get(arg0).getVideoId());
 		
 		return v;
 	}
